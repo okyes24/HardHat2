@@ -1,0 +1,104 @@
+{% include 'top.html'%}
+
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <div align="center">
+  <title>Gemini Image Analysis</title>
+</head>
+<body>
+<h1>Gemini Image Analysis</h1>
+
+<!-- 업로드 폼 -->
+<form method="POST" id="geminiForm" enctype="multipart/form-data">
+  {% csrf_token %}
+  <table border="1">
+    <tr><td>작성자:</td><td>
+    <input type="text" name="name" id="name" size="10"></td></tr>
+    <tr><td>설명:</td><td>
+    <input type="text" name="explain" id="explain" size="20"></td></tr>
+    <tr><td>이미지 파일:</td><td>
+      <input type="file" name="file" id="fileInput" accept="image/*"></td>
+    </tr>
+    <tr>
+      <td>프롬프트(추가 요청):</td>
+      <td><input type="text" name="prompt" size="50"></td>
+    </tr>
+    <tr>
+      <td colspan="2" align="center">
+        <input type="submit" value="질문하기">
+      </td>
+    </tr>
+  </table>
+</form>
+
+<hr>
+
+<!-- 업로드된 이미지 표시 -->
+{% if uploaded_img_url %}
+  <h2>업로드된 이미지</h2>
+  <img src="{{ uploaded_img_url }}" style="max-width:300px;" alt="Uploaded Image">
+{% endif %}
+
+<!-- Gemini API 분석 결과 -->
+{% if result %}
+  <h2>분석 결과</h2>
+  <p>{{ result }}</p>
+{% endif %}
+
+<!-- DB에 저장된 레코드(gemini) 정보 테이블 -->
+{% if geminis %}
+<h2>전체 DB 레코드</h2>
+<table border="1" width="80%" style="margin-top: 10px;">
+  <thead>
+    <tr>
+      <th>No</th>
+      <th>ID</th>
+      <th>NAME</th>
+      <th>EXPLAIN</th>
+      <th>AIEXPLAIN</th>
+      <th>FILENAME</th>
+      <th>Image</th>
+      <th>FILE</th>
+      <th>TODAY(삭제)</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for row in geminis %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ row.id }}</td>
+      <td>{{ row.name }}</td>
+      <td>{{ row.explain }}</td>
+      <td>{{ row.aiexplain }}</td>
+      <td>{{ row.filename }}</td>
+      <td><img src="/media/{{ row.file }}" style="max-width: 120px;" alt=""></td>
+      <td>{{ row.file }}</td>
+      <td><a href="{% url 'gemini_delete' row.pk %}">{{ row.today }}</a></td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+
+<script>
+document.getElementById("geminiForm").onsubmit = function(event) {
+  var fileInput = document.getElementById("fileInput");
+  var name = document.getElementById("name");
+  var explain = document.getElementById("explain");
+
+  if(!fileInput.files.length){
+    alert("파일을 첨부해주세요.");
+    event.preventDefault();
+  }else if(!name.value.trim()){
+    alert("작성자를 입력해주세요.");
+    event.preventDefault();
+  }else if(!explain.value.trim()){
+    alert("설명을 입력해주세요.");
+    event.preventDefault();
+  }
+}
+</script>
+</body>
+</html>
+{% include 'bottom.html'%}

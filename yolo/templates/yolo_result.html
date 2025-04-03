@@ -1,0 +1,33 @@
+{% load  static %}
+{% include  'top.html' %}
+<div align="center" >
+
+  <html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>YOLO 안전모 탐지 결과</title>
+</head>
+<body>
+    <h2>YOLOv8 안전모 탐지 결과</h2>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="file">
+        <input type="submit" value="분석하기">
+    </form>
+
+    {% if count %}
+        <p>탐지된 안전모 개수: {{ count }}</p>
+        <h3>📷 원본 이미지</h3>
+        <img src="{{ original_img }}" alt="Original Image" style="max-width: 300px;">
+
+        <h3>🔍 탐지된 결과 이미지</h3>
+        <img src="{{ result_img }}" alt="Result Image" style="max-width: 300px;">
+    {% endif %}
+</body>
+</html>
+ </div>
+  <br>
+</div>
+
+{% include  'bottom.html' %}

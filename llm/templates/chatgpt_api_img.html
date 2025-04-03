@@ -1,0 +1,59 @@
+{% include 'top.html'%}
+{% load  static %}
+<body>
+<hr>
+
+<div align="center">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="file">
+        <input type="submit" value="보내기">
+    </form>
+<hr>
+<h1> GPT API IMG 분석결과 </h1>
+<textarea cols="80" rows="10">
+    : {{result}}
+
+</textarea>
+{% if filename %}
+    <img src="/media/{{filename}}">
+{% endif%}
+
+
+<hr>
+
+{% if gpts %}
+<h2>전체 DB 레코드</h2>
+<table border="1" width="80%" style="margin-top: 10px;">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>NAME</th>
+      <th>AIEXPLAIN</th>
+      <th>FILENAME</th>
+      <th>Image</th>
+      <th>TODAY(삭제)</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for row in gpts %}
+    <tr>
+      <td>{{ row.id }}</td>
+      <td>{{ row.name }}</td>
+      <td>{{ row.aiexplain }}</td>
+      <td>{{ row.file }}</td>
+      <td><img src="/media/{{ row.file }}" style="max-width: 120px;" alt=""></td>
+      <td><a href="{% url 'chatgpt_delete' row.pk %}">{{ row.today }}</a></td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+
+
+
+
+</div>
+</body>
+</html>
+{% include 'bottom.html'%}

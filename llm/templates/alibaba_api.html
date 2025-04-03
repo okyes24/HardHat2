@@ -1,0 +1,29 @@
+{% include 'top.html'%}
+<body>
+<hr>
+<div align="center">
+<h1> 알리바바</h1>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <table border="1">
+        <tr><td>질문</td></tr>
+        <tr><td><input type="text" name="question" >
+                <input type="submit" value="질문하기">
+        </td></tr>
+        <tr><td>답변  </td></tr>
+        <tr><td>{{question}}</td></tr>
+        <tr><td><textarea cols="60" rows="7">{{result}}</textarea> </td></tr>
+    </table>
+
+
+</form>
+
+
+
+<hr>
+
+</div>
+</body>
+</html>
+{% include 'bottom.html'%}

@@ -1,0 +1,29 @@
+{% include  'top.html' %}
+
+<div align="center"><br>  <br>
+    <tr></tr>
+  <form  method="post">
+  {% csrf_token %}
+      <table border="1">
+          <tr><td>성별</td><td><input  type="text" name="sex" ></td></tr>
+          <tr><td>나이</td><td><input  type="text" name="age"></td></tr>
+          <tr><td>관심분야</td><td><input  type="text" name="concern" ></td></tr>
+          <tr><td>원하는 숫자</td><td><input  type="text" name="num" ></td></tr>
+          <tr><td>투자 성향</td><td><input  type="text" name="type1" ></td></tr>
+          <tr><td>현재 보유 종목</td><td><input  type="text" name="have" ></td></tr>
+          <tr><td>질문</td><td><input  type="text" name="search"></td></tr>
+    <tr><td colspan="2" align="center">
+        <input  type="submit" value="질문하기" >
+            </td></tr>
+  </form>
+    </table>
+  <hr >
+  {% if context != "" %}
+    <textarea cols="65" rows="10">
+  {{ result }}
+    </textarea>
+  {% endif %}
+</div>
+
+
+{% include  'bottom.html' %}
