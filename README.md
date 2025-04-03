@@ -22,7 +22,7 @@ YOLOv8 기반 안전모 탐지 모델을 Roboflow와 Google Colab을 통해 학�
 *결과 이미지:
 <tr  >
   
-  <td colspan="2" > <img src="https://github.com/okyes24/HardHat2/blob/master/static/img/cap2.jpg?raw=true"  />  </td>
+   <img src="https://github.com/okyes24/HardHat2/blob/master/static/img/cap2.jpg?raw=true"  /> 
   
 </tr>
   
