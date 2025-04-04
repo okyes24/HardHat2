@@ -12,6 +12,9 @@ YOLOv8 기반 안전모 탐지 모델을 Roboflow와 Google Colab을 통해 학�
 2. 구글 코랩 데이터 훈련  <br>
 3. 장고 프레임워크 - Yolo8 <br>
 4. 장고 프레임워크 - gemini-2.0-flash <br>
+<h2>* 결과 및 개선점 : </h2>
+ 1. 사용자가 이미지로 안전모 착용 여부를 직관적으로 확인 가능
+ 2. 탐지 결과에 대한 관리자 알림 및 경고 시스템 연동 검토 필요
 
 </h3>
 
@@ -19,7 +22,7 @@ YOLOv8 기반 안전모 탐지 모델을 Roboflow와 Google Colab을 통해 학�
 
 
 <table border=1  width=100%>
-*결과 이미지:
+<h2>* 결과 이미지 : </h2>
 <tr  >
   
    <img src="https://github.com/okyes24/HardHat2/blob/master/static/img/cap2.jpg?raw=true"  /> 
